@@ -14,7 +14,7 @@ get_pubkey <- function(){
 agent_init <- function(){
   appdir <- agent_dir()
   if(!file.exists(appdir))
-    dir.create(appdir)
+    dir.create(appdir, recursive = TRUE)
   if(!file.exists(appdir))
     stop("failed to create dir:", appdir)
   keyfile <- agent_dir("id_rsa")

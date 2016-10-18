@@ -11,27 +11,34 @@
 #' @rdname password
 update_password <- function(){
   oldkey <- get_key()
+  passwd <- new_password()
+  cat('generating new keypair.\n')
   key <- openssl::rsa_keygen()
   pubkey <- as.list(key)$pubkey
-  passwd <- new_password()
   openssl::write_pem(key, agent_dir("id_rsa.new"), password = passwd)
   openssl::write_pem(pubkey, agent_dir("id_rsa.pub.new"))
 
   # Update existing tokens
   keyfiles <- list.files(agent_dir(), "\\.key$", full.names = TRUE)
   allfiles <- c(keyfiles, agent_dir(c("id_rsa", "id_rsa.pub")))
+  if(length(keyfiles)) cat('updating existing tokens')
   lapply(keyfiles, function(keyfile){
+    cat(".")
     hash <- basename(keyfile)
     buf <- readBin(keyfile, raw(), file.info(keyfile)$size)
     aes <- openssl::rsa_decrypt(buf, oldkey, NULL)
     aes_encrypted <- openssl::rsa_encrypt(aes, pubkey = pubkey)
     writeBin(aes_encrypted, paste0(keyfile, ".new"))
   })
+  if(length(keyfiles)) cat('done.\n')
+  cat('deploying new key files.\n')
   bakfiles <- paste0(allfiles, ".bak")
   newfiles <- paste0(allfiles, ".new")
   file.rename(allfiles, bakfiles)
   file.rename(newfiles, allfiles)
   unlink(bakfiles)
+  rm(key)
+  cat("all done!\n")
 }
 
 #' @export
@@ -56,7 +63,7 @@ backup <- function(file){
 
 new_password <- function(x){
   if(!interactive()) return(character())
-  passwd <- ask_password("Please enter a new password. Leave blank or hit cancel for no passwd. You can update this later.")
+  passwd <- ask_password("Enter a new password (cancel/blank for no passwd)")
   if(length(passwd) && nchar(passwd)){
     passwd2 <- ask_password("Enter same password again to confirm")
     if(!identical(passwd, passwd2)){
