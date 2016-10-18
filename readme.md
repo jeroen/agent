@@ -1,43 +1,37 @@
-A Token Agent for R
--------------------
+# agent
 
-## API
+##### *Encrypted Key-Value Store for Sensitive Data*
 
-Storing tokens 
+[![Build Status](https://travis-ci.org/ropensci/agent.svg?branch=master)](https://travis-ci.org/ropensci/agent)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/agent?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/agent)
+[![Coverage Status](https://codecov.io/github/ropensci/agent/coverage.svg?branch=master)](https://codecov.io/github/ropensci/agent?branch=master)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/agent)](http://cran.r-project.org/package=agent)
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/agent)](http://cran.r-project.org/web/packages/agent/index.html)
+
+> Cross platform solution for securely storing sensitive data. This 
+  can either be used directly by the user or by other packages for storing 
+  e.g. web tokens or other secrets. The degree of security is detemined by 
+  the strength of the password as set by the user.
+
+## Hello World
+
+The agent works like a simple key-value store. The value can be any object that can be serialized by R such as a token or data frame. This API can either be called by the user or by other packages.
 
 ```r
-add_token(name, value)
-get_token(name)
-del_token(name)
+library(agent)
+agent_set("my_secret_token", "ABCXYZ")
+agent_get("my_secret_token")
+## "ABCXYZ"
+agent_has("my_secret_token")
+## TRUE
+agent_del("my_secret_token")
 ```
 
-Storing env variables
+It is up to the user to protect the keystore with a password:
+
 
 ```r
-add_env(name, value)
-get_env(name, set = TRUE)
-del_env(name)
-load_envs()
+update_password()
 ```
 
-Store:
-
- - Value can be anything serialized()
- - Randomly generated master key 
- - Encrypt value with aes_cbc()
- - Store each token in file substring(sha1(name), 16) with also IV=sha1(name)
-
-Where to store master key:
-
- - Encrypt master key with RSA keypair
- - Preferred: in OS keychain (for master key or rsa passwd?)
- - Or ssh/gpg agent ?
- - Otherwise: using RSA password protected
- - 
-
-Other:
-
- - when prompting for password, maybe display the calling stack to see which package is asking?
- - once the keychain is unlocked, cache the unencrypted tokens
- - make sure R does not access other stuff from the OS keychain
-
+The user will automatically be prompted for a password when the keystore needs to be unlocked, for example when a package needs to retrieve a secured token.
