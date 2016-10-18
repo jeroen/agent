@@ -1,0 +1,17 @@
+Package: agent
+Type: Package
+Title: Encrypted Key-Value Store for Sensitive Data
+Version: 0.1
+Author: Jeroen Ooms
+Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>
+Description: Cross platform solution for securely storing sensitive data. This 
+    can either be used directly by the user or by other packages for storing 
+    e.g. web tokens or other secrets. The degree of security is detemined by 
+    the strength of the password as set by the user.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Imports:
+    openssl,
+    rappdirs,
+    getPass
+RoxygenNote: 5.0.1.9000
