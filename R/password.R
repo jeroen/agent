@@ -76,7 +76,11 @@ new_password <- function(x){
 ask_password <- function(...){
   passwd <- tryCatch({
     newpass <- getPass::getPass(...)
-  }, interrupt = character())
-  as.character(passwd)
+  }, interrupt = NULL)
+  if(!length(passwd) || !nchar(passwd)){
+    return(NULL)
+  } else {
+    return(as.character(passwd))
+  }
 }
 
