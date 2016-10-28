@@ -11,7 +11,7 @@ Description: Cross platform solution for securely storing sensitive data. This
 License: MIT + file LICENSE
 Encoding: UTF-8
 Imports:
-    openssl,
+    openssl (>= 0.9.5),
     rappdirs,
     getPass
 RoxygenNote: 5.0.1.9000
