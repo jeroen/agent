@@ -18,11 +18,6 @@ matrix:
       osx_image: beta-xcode6.1
       disable_homebrew: true
       latex: false
-    - os: osx
-      osx_image: beta-xcode6.1
-      r: devel
-      disable_homebrew: true
-      latex: false
 
 addons:
   apt:

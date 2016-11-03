@@ -19,7 +19,7 @@ agent_set <- function(name, value){
   datafile <- token_datafile(hash)
   keyfile <- token_keyfile(hash)
   if(file.exists(datafile))
-    stop("token already exists")
+    stop(sprintf("token '%s' already exists", name))
   pubkey <- get_pubkey()
   aes <- openssl::rand_bytes(16)
   aes_encrypted <- openssl::rsa_encrypt(aes, pubkey = pubkey)
