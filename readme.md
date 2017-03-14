@@ -3,7 +3,7 @@
 ##### *Encrypted Key-Value Store for Sensitive Data*
 
 [![Build Status](https://travis-ci.org/ropensci/agent.svg?branch=master)](https://travis-ci.org/ropensci/agent)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/agent?branch=master&svg=true)](https://ci.appveyor.com/project/jeroenooms/agent)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/agent?branch=master&svg=true)](https://ci.appveyor.com/project/jeroen/agent)
 [![Coverage Status](https://codecov.io/github/ropensci/agent/coverage.svg?branch=master)](https://codecov.io/github/ropensci/agent?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/agent)](http://cran.r-project.org/package=agent)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/agent)](http://cran.r-project.org/web/packages/agent/index.html)
