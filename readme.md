@@ -2,6 +2,7 @@
 
 ##### *Encrypted Key-Value Store for Sensitive Data*
 
+[![Project Status: Concept – Minimal or no implementation has been done yet, or the repository is only intended to be a limited example, demo, or proof-of-concept.](http://www.repostatus.org/badges/latest/concept.svg)](http://www.repostatus.org/#concept)
 [![Build Status](https://travis-ci.org/ropensci/agent.svg?branch=master)](https://travis-ci.org/ropensci/agent)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/agent?branch=master&svg=true)](https://ci.appveyor.com/project/jeroen/agent)
 [![Coverage Status](https://codecov.io/github/ropensci/agent/coverage.svg?branch=master)](https://codecov.io/github/ropensci/agent?branch=master)
